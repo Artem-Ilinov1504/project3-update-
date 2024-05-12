@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+    {% block title %}
+        Избранные записи
+    {% endblock %}
+
+    {% block content %}
+        <form action="favorites" method="post">
+            <label for="name">Enter name of favorites record</label>
+            <input type="text" id="name" name="favorites_name" required><br>
+            <label for="text">Enter favorites record</label>
+            <input type="text" id="text" name="favorites_text" required><br>
+            <button type="submit">Add record</button>
+        </form>
+    {% if favorites_records %}
+        <h1>Записи:</h1>
+        <ul>
+            {% for favorites_record in favorites_records %}
+                <li>{{favorites_record.id}} {{favorites_record.name}} {{favorites_record.text}}</li>
+
+            {% endfor %}
+            <form action="delete_favorites" method="post">
+                <input type="number" id="id" name="id" placeholder="Number of record">
+                <button type="submit">Delete</button>
+            </form>
+        </ul>
+    {% endif %}
+    {% endblock %}
